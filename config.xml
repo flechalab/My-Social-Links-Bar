@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mySocialLinksBar>
+	<links>
+		<link class="rss" img=""></link>
+		<link class="facebook" img=""></link>
+		<link class="youtube" img=""></link>
+		<link class="twitter" img=""></link>
+		<link class="myspace" img=""></link>
+		<link class="yahoo" img=""></link>
+		<link class="lastfm" img=""></link>
+		<link class="vimeo" img=""></link>
+		<link class="blogger" img=""></link>
+		<link class="delicious" img=""></link>
+		<link class="flickr" img=""></link>
+		<link class="picasa" img=""></link>
+		<link class="linkedin" img=""></link>
+	</links>
+	<urls>
+		<url class="rss"/>
+		<url class="facebook">http://facebook.com/</url>
+		<url class="youtube">http://youtube.com/</url>
+		<url class="twitter">http://twitter.com/</url>
+		<url class="myspace">http://myspace.com/</url>
+		<url class="yahoo">http://yahoo.com/</url>
+		<url class="lastfm">http://lastfm.com/</url>
+		<url class="vimeo">http://vimeo.com/</url>
+		<url class="blogger">http://blogspot.com/</url>
+		<url class="delicious">http://delicious.com/</url>
+		<url class="flickr">http://flickr.com/photos/</url>
+		<url class="picasa">http://picasaweb.google.com/</url>
+		<url class="linkedin">http://linkedin.com/pub/</url>
+	</urls>
+	<configuration>
+		<path desc="Main Path"></path>
+		<icon_path desc="Icon Path"></icon_path>
+		<icon_size desc="Icon Size"></icon_size>
+		<minimized desc="Load Minimized"></minimized>
+		<positionx desc="Horizontal Position"></positionx>
+		<positiony desc="Vertical Position"></positiony>
+		<label desc="Label"></label>
+		<label_min desc="Minimized Label"></label_min>
+    	<modal desc="Modal (to implements)"></modal>
+	</configuration>
+</mySocialLinksBar>
