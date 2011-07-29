@@ -5,6 +5,6 @@
  *********************************************/
  
 jQuery(document).ready( function() { 
-	mySocialLinksBar = new mySocialLinksBar();
-	mySocialLinksBar.load();
+    mySocialLinksBar = new mySocialLinksBar();
+    mySocialLinksBar.load();
 });

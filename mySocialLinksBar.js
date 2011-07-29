@@ -5,404 +5,404 @@
  ***********************************/
 function mySocialLinksBar() {
 
-	// path indicates where load my-social-links-bar is located
-	var path = './';
+    // path indicates where load my-social-links-bar is located
+    var path = './';
 
-	// path indicates where are the icons used in bar's links 	
-	var icon_path = 'icons';
+    // path indicates where are the icons used in bar's links 	
+    var icon_path = 'icons';
 
     // set icon size 	
-	var icon_size = 'normal';
+    var icon_size = 'normal';
 	
-	// icons size definitions, converting string to value (px)
+    // icons size definitions, converting string to value (px)
 
-	//TODO
-	//var icon_size_def = [ { normal:24, large:48, xlarge:64} ];
-	var icon_size_def = new Array();
-	icon_size_def['normal']  = 24;
-	icon_size_def['large']   = 32;
-	icon_size_def['xlarge']  = 48;
+    //TODO
+    //var icon_size_def = [ { normal:24, large:48, xlarge:64} ];
+    var icon_size_def = new Array();
+    icon_size_def['normal']  = 24;
+    icon_size_def['large']   = 32;
+    icon_size_def['xlarge']  = 48;
 	
-	// vars that set configuration's bar	
-	var posx = 'right', posy = 'top', minimized = 0, label = '>', label_min = '<';
+    // vars that set configuration's bar	
+    var posx = 'right', posy = 'top', minimized = 0, label = '>', label_min = '<';
 
-	// xml var is the data information to make the bar
-	var xml;
+    // xml var is the data information to make the bar
+    var xml;
 
-	// css array can put additional css layout in bar
-	var css = new Array();
+    // css array can put additional css layout in bar
+    var css = new Array();
 
 
-	/*************************************
+    /*************************************
 	 * call and load xml data to var xml 
 	 * if sucess call method to load bar 
 	 ************************************/
-	this.load = function() {
+    this.load = function() {
 
-		jQuery.ajax({
-			type: "GET",
-			dataType: "xml",
-			url : path + "config.xml",
+        jQuery.ajax({
+            type: "GET",
+            dataType: "xml",
+            url : path + "config.xml",
 
-			error : function() {
-				return false;
-			},
+            error : function() {
+                return false;
+            },
 
-			success : function(data) {
-				xml = data;
-				mySocialLinksBar.loadBar();
-			}
-		}); // ajax	
+            success : function(data) {
+                xml = data;
+                mySocialLinksBar.loadBar();
+            }
+        }); // ajax	
 
-	};// load
+    };// load
 
 
-	/********************************************
+    /********************************************
 	 * load xml var with data (wordpress plugin) 
 	 * used when xml data is not from config.xml 
 	 ********************************************/
-	this.loadXML = function(data) {
-		xml = data;
-	}
+    this.loadXML = function(data) {
+        xml = data;
+    }
 	
-	/*****************************
+    /*****************************
 	 * method loads bar in page 
 	 ****************************/
-	this.loadBar = function() {
-		this.config();
-		this.links();
-		this.border();
-		this.position();
-		this.view();	
-	}
+    this.loadBar = function() {
+        this.config();
+        this.links();
+        this.border();
+        this.position();
+        this.view();	
+    }
 
-	/*********************************
+    /*********************************
 	 * set initial config of toolbar
 	 ********************************/
-	this.config = function() {
-		icon_path  = ( jQuery(xml).find('icon_path').text()  == '' ) ? icon_path : jQuery(xml).find('icon_path').text();
+    this.config = function() {
+        icon_path  = ( jQuery(xml).find('icon_path').text()  == '' ) ? icon_path : jQuery(xml).find('icon_path').text();
         icon_size  = ( jQuery(xml).find('icon_size').text()  == '' ) ? icon_size : jQuery(xml).find('icon_size').text();
-		posx       = ( jQuery(xml).find('positionx').text()  == '' ) ? posx      : jQuery(xml).find('positionx').text();			
-		posy       = ( jQuery(xml).find('positiony').text()  == '' ) ? posy      : jQuery(xml).find('positiony').text();
-		minimized  = ( jQuery(xml).find('minimized').text()  == '' ) ? minimized : jQuery(xml).find('minimized').text();
-		label      = ( jQuery(xml).find('label').text()      == '' ) ? label     : jQuery(xml).find('label').text();
-		label_min  = ( jQuery(xml).find('label_min').text()  == '' ) ? label_min : jQuery(xml).find('label_min').text();
+        posx       = ( jQuery(xml).find('positionx').text()  == '' ) ? posx      : jQuery(xml).find('positionx').text();			
+        posy       = ( jQuery(xml).find('positiony').text()  == '' ) ? posy      : jQuery(xml).find('positiony').text();
+        minimized  = ( jQuery(xml).find('minimized').text()  == '' ) ? minimized : jQuery(xml).find('minimized').text();
+        label      = ( jQuery(xml).find('label').text()      == '' ) ? label     : jQuery(xml).find('label').text();
+        label_min  = ( jQuery(xml).find('label_min').text()  == '' ) ? label_min : jQuery(xml).find('label_min').text();
 
-		this.setIconPath( this.getIconPath() + '/' + this.getIconSize() + '/' );
-	};
+        this.setIconPath( this.getIconPath() + '/' + this.getIconSize() + '/' );
+    };
 
 
-	/******************************
+    /******************************
 	 * building bar div with links  
 	 *****************************/
-	this.links = function() {
+    this.links = function() {
 
-		// creating div toolbar
-		jQuery('body').append('<div id="mySocialLinksBar"></div>');
+        // creating div toolbar
+        jQuery('body').append('<div id="mySocialLinksBar"></div>');
 
-		jQuery(xml).find('link').each(function(){
+        jQuery(xml).find('link').each(function(){
 	
-			// link vars
-			var id     = jQuery(this).attr('class');
-			var url    = jQuery(xml).find('url.'+id).text();
-			var value  = jQuery(this).text();
+            // link vars
+            var id     = jQuery(this).attr('class');
+            var url    = jQuery(xml).find('url.'+id).text();
+            var value  = jQuery(this).text();
 
-			// make the link only to social media id's that value is not false or empty
-			if(value!=false || value!='') { 
+            // make the link only to social media id's that value is not false or empty
+            if(value!=false || value!='') { 
 
-				//creating img
-				var img   = (jQuery(this).attr('img')==null || jQuery(this).attr('img')=='') ? id : jQuery(this).attr('img');
-				img       =  '<img src="' + path + icon_path + img + '_' + icon_size_def[icon_size] + '_2.png" alt="' + id + '">';
+                //creating img
+                var img   = (jQuery(this).attr('img')==null || jQuery(this).attr('img')=='') ? id : jQuery(this).attr('img');
+                img       =  '<img src="' + path + icon_path + img + '_' + icon_size_def[icon_size] + '_2.png" alt="' + id + '">';
 
                 title = id.substr(0,1).toUpperCase() + id.substr(1).toLowerCase();
 
-				// creating url
-				if(id=='rss') {
-					var link  =  '<a href="' + value + '" title="' + title + '" target="_blank">' + img + '</a>';
-				}
-				else if(id=='blogger') {
-					var link  =  '<a href="' + url.replace('http://', 'http://' + value + '.') +'" title="' + title + '" target="_blank">' + img + '</a>';
-				}
-				else {
-					var link  =  '<a href="' + url + value +'" title="' + title + '" target="_blank">' + img + '</a>';
-				}
+                // creating url
+                if(id=='rss') {
+                    var link  =  '<a href="' + value + '" title="' + title + '" target="_blank">' + img + '</a>';
+                }
+                else if(id=='blogger') {
+                    var link  =  '<a href="' + url.replace('http://', 'http://' + value + '.') +'" title="' + title + '" target="_blank">' + img + '</a>';
+                }
+                else {
+                    var link  =  '<a href="' + url + value +'" title="' + title + '" target="_blank">' + img + '</a>';
+                }
 				
-				// creating div
-				var div   =  '<div id="mySocialLinksBar-' + id + '">' + link + '</div>'	
+                // creating div
+                var div   =  '<div id="mySocialLinksBar-' + id + '">' + link + '</div>'	
 		
-				// putting div in the bar
-				jQuery('#mySocialLinksBar').append(div);
-			}
-		});
+                // putting div in the bar
+                jQuery('#mySocialLinksBar').append(div);
+            }
+        });
 
-		// set postiong of bar's label
-		if(posx=='left') {
-			jQuery('#mySocialLinksBar').prepend('<div id="mySocialLinksBarLabel">' + label + '</div>');
-		}
-		else {
-			jQuery('#mySocialLinksBar').append('<div id="mySocialLinksBarLabel">' + label + '</div>');
-		}
+        // set postiong of bar's label
+        if(posx=='left') {
+            jQuery('#mySocialLinksBar').prepend('<div id="mySocialLinksBarLabel">' + label + '</div>');
+        }
+        else {
+            jQuery('#mySocialLinksBar').append('<div id="mySocialLinksBarLabel">' + label + '</div>');
+        }
 
-	};
+    };
 
 		
-	/*******************************************
+    /*******************************************
 	 * applying radius effect on bar border
 	 * it will be applicable in specifics
 	 * borders depending of vertical position
 	 ******************************************/
-	this.border = function() {
-		if(posy=='top') {
-			jQuery('#mySocialLinksBar').css('-webkit-border-bottom-left-radius', '10px');
-			jQuery('#mySocialLinksBar').css('-moz-border-radius-bottomleft', '10px');
-			jQuery('#mySocialLinksBar').css('border-bottom-left-radius', '10px');
+    this.border = function() {
+        if(posy=='top') {
+            jQuery('#mySocialLinksBar').css('-webkit-border-bottom-left-radius', '10px');
+            jQuery('#mySocialLinksBar').css('-moz-border-radius-bottomleft', '10px');
+            jQuery('#mySocialLinksBar').css('border-bottom-left-radius', '10px');
 
             jQuery('#mySocialLinksBar').css('-webkit-border-bottom-right-radius', '10px');
-			jQuery('#mySocialLinksBar').css('-moz-border-radius-bottomright', '10px');
-			jQuery('#mySocialLinksBar').css('border-bottom-right-radius', '10px');
+            jQuery('#mySocialLinksBar').css('-moz-border-radius-bottomright', '10px');
+            jQuery('#mySocialLinksBar').css('border-bottom-right-radius', '10px');
 
-			jQuery('#mySocialLinksBar').css('-webkit-box-shadow', '1px 1px 1px #666');
-			jQuery('#mySocialLinksBar').css('-moz-box-shadow', '1px 1px 1px #666');
+            jQuery('#mySocialLinksBar').css('-webkit-box-shadow', '1px 1px 1px #666');
+            jQuery('#mySocialLinksBar').css('-moz-box-shadow', '1px 1px 1px #666');
             jQuery('#mySocialLinksBar').css('box-shadow', '1px 1px 1px #666');
-		}
-		else {
-			jQuery('#mySocialLinksBar').css('-webkit-border-top-left-radius', '10px');
-			jQuery('#mySocialLinksBar').css('-moz-border-radius-topleft', '10px');
+        }
+        else {
+            jQuery('#mySocialLinksBar').css('-webkit-border-top-left-radius', '10px');
+            jQuery('#mySocialLinksBar').css('-moz-border-radius-topleft', '10px');
             jQuery('#mySocialLinksBar').css('border-top-left-radius', '10px');
 
             jQuery('#mySocialLinksBar').css('-webkit-border-top-right-radius', '10px');
-			jQuery('#mySocialLinksBar').css('-moz-border-radius-topright', '10px');
+            jQuery('#mySocialLinksBar').css('-moz-border-radius-topright', '10px');
             jQuery('#mySocialLinksBar').css('border-top-right-radius', '10px');
 
-			jQuery('#mySocialLinksBar').css('-webkit-box-shadow', '1px -1px 1px #666');
-			jQuery('#mySocialLinksBar').css('-moz-box-shadow', '1px -1px 1px #666');
+            jQuery('#mySocialLinksBar').css('-webkit-box-shadow', '1px -1px 1px #666');
+            jQuery('#mySocialLinksBar').css('-moz-box-shadow', '1px -1px 1px #666');
             jQuery('#mySocialLinksBar').css('box-shadow', '1px -1px 1px #666');
-		}
+        }
 
-	};
+    };
 
 
-	/***************************************************
+    /***************************************************
 	 * verify bar's position definied to set it  
 	 ***************************************************/
-	this.position = function() {
-		var position = new Array();
+    this.position = function() {
+        var position = new Array();
 
-		// posicionamento x (left/right) 
-		position[posx] = 0;
+        // posicionamento x (left/right) 
+        position[posx] = 0;
 	
-		// posicionamento y (top/bottom) 
-		position[posy] = 0;
+        // posicionamento y (top/bottom) 
+        position[posy] = 0;
 
-		// setando os 2 itens do css
-		for(var i in position) {
-			jQuery('#mySocialLinksBar').css(i, position[i]);
-		}
-	};
+        // setando os 2 itens do css
+        for(var i in position) {
+            jQuery('#mySocialLinksBar').css(i, position[i]);
+        }
+    };
 	
 	
-	/*************************************
+    /*************************************
 	 * check css array var to add in bar 
 	 *************************************/
-	this.css = function() {
-		for(var i in css) {
-			jQuery('#mySocialLinksBar').css(i, css[i]);
-		}
-	};
+    this.css = function() {
+        for(var i in css) {
+            jQuery('#mySocialLinksBar').css(i, css[i]);
+        }
+    };
 	
 	
-	/******************************************************
+    /******************************************************
 	 * chenge tollbar view ( minimized and full )
 	 *****************************************************/
-	this.view = function() {
-	   jQuery('#mySocialLinksBar').slideUp(this.show).delay().slideDown(500);
-	};
+    this.view = function() {
+        jQuery('#mySocialLinksBar').slideUp(this.show).delay().slideDown(500);
+    };
 
 
-	/********************************************************
+    /********************************************************
 	 * set html/css acording config view defined min/full
 	 *******************************************************/
-	this.show = function() {
-		if(minimized==1) {
-			label_link = '<a href="Javascript:void(0)" onClick="Javascript:mySocialLinksBar.view();" title="' + label_min + '">' + label_min + '</a>';
-    		jQuery('#mySocialLinksBar div').css('height', icon_size_def['normal'] + 'px');
-			jQuery('#mySocialLinksBarLabel').html(label_link);
-			jQuery('#mySocialLinksBar div').css('display', 'none');
-			jQuery('#mySocialLinksBarLabel').css('display', 'block');
-			minimized = false;
-		}
-		else {
-			label_link = '<a href="Javascript:void(0)" onClick="Javascript:mySocialLinksBar.view();" title="' + label + '">' + label + '</a>';
+    this.show = function() {
+        if(minimized==1) {
+            label_link = '<a href="Javascript:void(0)" onClick="Javascript:mySocialLinksBar.view();" title="' + label_min + '">' + label_min + '</a>';
+            jQuery('#mySocialLinksBar div').css('height', icon_size_def['normal'] + 'px');
+            jQuery('#mySocialLinksBarLabel').html(label_link);
+            jQuery('#mySocialLinksBar div').css('display', 'none');
+            jQuery('#mySocialLinksBarLabel').css('display', 'block');
+            minimized = false;
+        }
+        else {
+            label_link = '<a href="Javascript:void(0)" onClick="Javascript:mySocialLinksBar.view();" title="' + label + '">' + label + '</a>';
             jQuery('#mySocialLinksBar div').css('height', icon_size_def[icon_size] + 'px');
-			jQuery('#mySocialLinksBarLabel').html(label_link);
-			jQuery('#mySocialLinksBar div').css('display', 'block');
-			minimized = true;
-		}
-	}
+            jQuery('#mySocialLinksBarLabel').html(label_link);
+            jQuery('#mySocialLinksBar div').css('display', 'block');
+            minimized = true;
+        }
+    }
 
 
-	/********************
+    /********************
 	 * get default path
 	 *******************/
-	this.getPath = function() {
-		return path;
-	}
+    this.getPath = function() {
+        return path;
+    }
 
 
-	/********************
+    /********************
 	 * get img path
 	 *******************/
-	this.getIconPath = function() {
-		return icon_path;
-	}
+    this.getIconPath = function() {
+        return icon_path;
+    }
 
-	/********************
+    /********************
 	 * get img size
 	 *******************/
-	this.getIconSize = function() {
-		return icon_size;
-	}
+    this.getIconSize = function() {
+        return icon_size;
+    }
 	
 	
-	/********************
+    /********************
 	 * set default path
 	 *******************/
-	this.setPath = function(new_path) {
-		path = new_path;
-	}
+    this.setPath = function(new_path) {
+        path = new_path;
+    }
 
 
-	/********************
+    /********************
 	 * set img path
 	 *******************/
-	this.setIconPath = function(new_path) {
-		icon_path = new_path;
-	}
+    this.setIconPath = function(new_path) {
+        icon_path = new_path;
+    }
 
-	/********************
+    /********************
 	 * set img size
 	 *******************/
-	this.setIconSize = function(new_size) {
-		icon_size = new_size;
-	}
+    this.setIconSize = function(new_size) {
+        icon_size = new_size;
+    }
 
 
 
     //TODO 
     	
-	/********************************************
+    /********************************************
 	 * call and load xml, and execute process to 
 	 * create a form to management data
 	 ********************************************/
-	this.form = function() {
+    this.form = function() {
 		
-		jQuery.ajax({
+        jQuery.ajax({
 
-			type: "GET",
-			dataType: "xml",			
-			url : path + "config.xml",
+            type: "GET",
+            dataType: "xml",			
+            url : path + "config.xml",
 			
-			error : function() {
-				return false;
-			},
+            error : function() {
+                return false;
+            },
 
-			success : function(data) {
-				xml = data;
+            success : function(data) {
+                xml = data;
 
-				icon_path  = jQuery(xml).find('icon_path').text();
+                icon_path  = jQuery(xml).find('icon_path').text();
 
-				// urls from social links
-				//***********************
-				jQuery(xml).find('url').each(function() {
+                // urls from social links
+                //***********************
+                jQuery(xml).find('url').each(function() {
 
-					var id     = jQuery(this).attr('class');
-					var url    = (id=='feed') ? '(feed)' : jQuery(this).text();
-					var value  = jQuery(xml).find('link.'+id).text();
+                    var id     = jQuery(this).attr('class');
+                    var url    = (id=='feed') ? '(feed)' : jQuery(this).text();
+                    var value  = jQuery(xml).find('link.'+id).text();
 
-					// creating img
-					var img   = (jQuery(this).attr('img')==null || jQuery(this).attr('img')=='') ? id : jQuery(this).attr('img');
-					img       =  '<img src="' + path + icon_path + img + '.png" alt="' + id + '">';
+                    // creating img
+                    var img   = (jQuery(this).attr('img')==null || jQuery(this).attr('img')=='') ? id : jQuery(this).attr('img');
+                    img       =  '<img src="' + path + icon_path + img + '.png" alt="' + id + '">';
 
-					// creating input
-					var input =  img+' <span>'+url+'</span><input id="'+id+'" name="'+id+'" value="'+value+'" />';
+                    // creating input
+                    var input =  img+' <span>'+url+'</span><input id="'+id+'" name="'+id+'" value="'+value+'" />';
 
-					// creating div
-					var div   =  '<div id="mySocialLinksBar-' + id + '" class="bar-urls">' + input + '</div>'
+                    // creating div
+                    var div   =  '<div id="mySocialLinksBar-' + id + '" class="bar-urls">' + input + '</div>'
 		
-					// putting div in the toolbar
-					jQuery('#mySocialLinksBar-links').append(div);
+                    // putting div in the toolbar
+                    jQuery('#mySocialLinksBar-links').append(div);
 
-				});// loop urls
+                });// loop urls
 
 
 
-				// configuration
-				//***************
-				jQuery(xml).find('configuration').children().each(function() {
+                // configuration
+                //***************
+                jQuery(xml).find('configuration').children().each(function() {
 
-					var id     = jQuery(this).get(0).tagName;
-					var desc   = jQuery(this).attr('desc');
-					var value  = jQuery(this).text();
+                    var id     = jQuery(this).get(0).tagName;
+                    var desc   = jQuery(this).attr('desc');
+                    var value  = jQuery(this).text();
 
-					// creating fields
-					if(id=='path' || id=='modal') {
-						return;
-					}
+                    // creating fields
+                    if(id=='path' || id=='modal') {
+                        return;
+                    }
 					
-					if(id=='icon_size') {
-						var input =  '<span>'+desc+'</span> \
+                    if(id=='icon_size') {
+                        var input =  '<span>'+desc+'</span> \
 						<select id="'+id+'" name="'+id+'"> \
 						<option value="normal">Default</option> \
 						<option value="large">Large</option> \
 						<option value="xlarge">XLarge</option> \
 						</select>';
-					}
+                    }
 
-					if(id=='minimized') {
-						var input =  '<span>'+desc+'</span> \
+                    if(id=='minimized') {
+                        var input =  '<span>'+desc+'</span> \
 						<select id="'+id+'" name="'+id+'"> \
 						<option value="1">Yes</option> \
 						<option value="0">No</option> \
 						</select>';
-					}
+                    }
 
-					if(id=='positionx') {
-						var input =  '<span>'+desc+'</span> \
+                    if(id=='positionx') {
+                        var input =  '<span>'+desc+'</span> \
 						<select id="'+id+'" name="'+id+'"> \
 						<option value="left">Left</option> \
 						<option value="right">Right</option> \
 						</select>';
-					}
+                    }
 
-					if(id=='positiony') {
-						var input =  '<span>'+desc+'</span> \
+                    if(id=='positiony') {
+                        var input =  '<span>'+desc+'</span> \
 						<select id="'+id+'" name="'+id+'"> \
 						<option value="top">Top</option> \
 						<option value="bottom">Bottom</option> \
 						</select>';
-					}
+                    }
 					
-					if(id=='label' || id=='label_min') {
-						var input =  '<span>'+desc+'</span><input id="'+id+'" name="'+id+'" value="'+value+'" />';					
-					}
+                    if(id=='label' || id=='label_min') {
+                        var input =  '<span>'+desc+'</span><input id="'+id+'" name="'+id+'" value="'+value+'" />';					
+                    }
 					
-					// creating div
-					var div   =  '<div id="mySocialLinksBar-' + id + '" class="bar-config">' + input + '</div>'
+                    // creating div
+                    var div   =  '<div id="mySocialLinksBar-' + id + '" class="bar-config">' + input + '</div>'
 		
-					// putting div in the toolbar
-					jQuery('#mySocialLinksBar-config').append(div);
+                    // putting div in the toolbar
+                    jQuery('#mySocialLinksBar-config').append(div);
 					
-					// selecting combo item
-					jQuery('#'+id+' option[value='+value+']').attr('selected','selected');
+                    // selecting combo item
+                    jQuery('#'+id+' option[value='+value+']').attr('selected','selected');
 
 
-				});// loop config
+                });// loop config
 
 
-			} // success
+            } // success
 			
-		}); // ajax	
+        }); // ajax	
 
-	};// form
+    };// form
 	
 }
