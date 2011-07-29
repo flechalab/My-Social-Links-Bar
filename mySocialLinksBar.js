@@ -34,9 +34,9 @@ function mySocialLinksBar() {
 
 
     /*************************************
-	 * call and load xml data to var xml 
-	 * if sucess call method to load bar 
-	 ************************************/
+    * call and load xml data to var xml 
+    * if sucess call method to load bar 
+    ************************************/
     this.load = function() {
 
         jQuery.ajax({
@@ -58,16 +58,16 @@ function mySocialLinksBar() {
 
 
     /********************************************
-	 * load xml var with data (wordpress plugin) 
-	 * used when xml data is not from config.xml 
-	 ********************************************/
+     * load xml var with data (wordpress plugin) 
+     * used when xml data is not from config.xml 
+     ********************************************/
     this.loadXML = function(data) {
         xml = data;
     }
 	
     /*****************************
-	 * method loads bar in page 
-	 ****************************/
+     * method loads bar in page 
+     ****************************/
     this.loadBar = function() {
         this.config();
         this.links();
@@ -77,8 +77,8 @@ function mySocialLinksBar() {
     }
 
     /*********************************
-	 * set initial config of toolbar
-	 ********************************/
+     * set initial config of toolbar
+     ********************************/
     this.config = function() {
         icon_path  = ( jQuery(xml).find('icon_path').text()  == '' ) ? icon_path : jQuery(xml).find('icon_path').text();
         icon_size  = ( jQuery(xml).find('icon_size').text()  == '' ) ? icon_size : jQuery(xml).find('icon_size').text();
@@ -93,8 +93,8 @@ function mySocialLinksBar() {
 
 
     /******************************
-	 * building bar div with links  
-	 *****************************/
+     * building bar div with links  
+     *****************************/
     this.links = function() {
 
         // creating div toolbar
@@ -147,10 +147,10 @@ function mySocialLinksBar() {
 
 		
     /*******************************************
-	 * applying radius effect on bar border
-	 * it will be applicable in specifics
-	 * borders depending of vertical position
-	 ******************************************/
+     * applying radius effect on bar border
+     * it will be applicable in specifics
+     * borders depending of vertical position
+     ******************************************/
     this.border = function() {
         if(posy=='top') {
             jQuery('#mySocialLinksBar').css('-webkit-border-bottom-left-radius', '10px');
@@ -183,8 +183,8 @@ function mySocialLinksBar() {
 
 
     /***************************************************
-	 * verify bar's position definied to set it  
-	 ***************************************************/
+     * verify bar's position definied to set it  
+     ***************************************************/
     this.position = function() {
         var position = new Array();
 
@@ -199,11 +199,11 @@ function mySocialLinksBar() {
             jQuery('#mySocialLinksBar').css(i, position[i]);
         }
     };
-	
-	
+
+
     /*************************************
-	 * check css array var to add in bar 
-	 *************************************/
+     * check css array var to add in bar 
+     *************************************/
     this.css = function() {
         for(var i in css) {
             jQuery('#mySocialLinksBar').css(i, css[i]);
@@ -212,16 +212,16 @@ function mySocialLinksBar() {
 	
 	
     /******************************************************
-	 * chenge tollbar view ( minimized and full )
-	 *****************************************************/
+     * chenge tollbar view ( minimized and full )
+     *****************************************************/
     this.view = function() {
         jQuery('#mySocialLinksBar').slideUp(this.show).delay().slideDown(500);
     };
 
 
     /********************************************************
-	 * set html/css acording config view defined min/full
-	 *******************************************************/
+     * set html/css acording config view defined min/full
+     *******************************************************/
     this.show = function() {
         if(minimized==1) {
             label_link = '<a href="Javascript:void(0)" onClick="Javascript:mySocialLinksBar.view();" title="' + label_min + '">' + label_min + '</a>';
@@ -242,46 +242,46 @@ function mySocialLinksBar() {
 
 
     /********************
-	 * get default path
-	 *******************/
+     * get default path
+     *******************/
     this.getPath = function() {
         return path;
     }
 
 
     /********************
-	 * get img path
-	 *******************/
+     * get img path
+     *******************/
     this.getIconPath = function() {
         return icon_path;
     }
 
     /********************
-	 * get img size
-	 *******************/
+     * get img size
+     *******************/
     this.getIconSize = function() {
         return icon_size;
     }
 	
 	
     /********************
-	 * set default path
-	 *******************/
+     * set default path
+     *******************/
     this.setPath = function(new_path) {
         path = new_path;
     }
 
 
     /********************
-	 * set img path
-	 *******************/
+     * set img path
+     *******************/
     this.setIconPath = function(new_path) {
         icon_path = new_path;
     }
 
     /********************
-	 * set img size
-	 *******************/
+     * set img size
+     *******************/
     this.setIconSize = function(new_size) {
         icon_size = new_size;
     }
@@ -289,11 +289,11 @@ function mySocialLinksBar() {
 
 
     //TODO 
-    	
+
     /********************************************
-	 * call and load xml, and execute process to 
-	 * create a form to management data
-	 ********************************************/
+     * call and load xml, and execute process to 
+     * create a form to management data
+     ********************************************/
     this.form = function() {
 		
         jQuery.ajax({
